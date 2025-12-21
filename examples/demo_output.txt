@@ -1,0 +1,66 @@
+_____ _               _             _   _             _            
+/  ___| |             | |           | | | |           | |           
+\ `--.| |__   ___   __| | __ _ _ __ | |_| |_   _ _ __ | |_ ___ _ __ 
+ `--. \ '_ \ / _ \ / _` |/ _` | '_ \|  _  | | | | '_ \| __/ _ \ '__|
+/\__/ / | | | (_) | (_| | (_| | | | | | | | |_| | | | | ||  __/ |   
+\____/|_| |_|\___/ \__,_|\__,_|_| |_\_| |_/\__,_|_| |_|\__\___|_|   
+
+[+] ShodanHunter v1.0 - Multi-Technology Scanner
+[*] Technologies: Citrix, Jenkins, GitLab, Jira, Confluence, WordPress, Apache, Grafana, Kibana
+[*] GitHub: https://github.com/algamil7x/ShodanHunter
+
+[*] Starting hunt on: *.example.com
+[*] Loading queries from: queries/citrix.txt
+
+Loaded 23 queries from queries/citrix.txt
+Output will be saved to: example_results.txt
+
+[1/23] Domain: example.com | Query: http.favicon.hash:-1292923998
+[*] Searching: http.favicon.hash:-1292923998
+    Total available: 5
+    [+] Found: https://vpn.example.com
+    [+] Found: https://gateway.example.com
+    ✓ Query complete: 2 unique URLs added
+
+[2/23] Domain: example.com | Query: http.title:"Citrix Gateway"
+[*] Searching: http.title:"Citrix Gateway"
+    Total available: 3
+    [+] Found: https://citrix.example.com
+    ✓ Query complete: 1 unique URLs added
+
+[3/23] Domain: example.com | Query: product:"Citrix Gateway"
+[*] Searching: product:"Citrix Gateway"
+    Total available: 2
+    [+] Found: https://netscaler.example.com
+    ✓ Query complete: 1 unique URLs added
+
+[4/23] Domain: example.com | Query: http.title:"NetScaler"
+[*] Searching: http.title:"NetScaler"
+    Total available: 1
+    ✓ Query complete: 0 unique URLs added
+
+[5/23] Domain: example.com | Query: ssl.cert.subject.cn:"citrix"
+[*] Searching: ssl.cert.subject.cn:"citrix"
+    Total available: 2
+    [+] Found: https://remote.example.com
+    ✓ Query complete: 1 unique URLs added
+
+... (continuing for remaining queries)
+
+[23/23] Domain: example.com | Query: http.component:"Citrix NetScaler"
+[*] Searching: http.component:"Citrix NetScaler"
+    Total available: 0
+    ✓ Query complete: 0 unique URLs added
+
+✓ All queries complete: 5 total unique URLs
+
+✓ Completed! Found 5 unique URLs. Saved to example_results.txt
+
+=== RESULTS SUMMARY ===
+Total URLs: 5
+
+https://citrix.example.com
+https://gateway.example.com
+https://netscaler.example.com
+https://remote.example.com
+https://vpn.example.com
