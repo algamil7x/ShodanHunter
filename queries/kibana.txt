@@ -1,0 +1,6 @@
+http.title:"Kibana"
+product:"Kibana"
+http.component:"Kibana"
+http.html:"kibana"
+port:5601
+ssl.cert.subject.cn:"kibana"

@@ -1,0 +1,7 @@
+http.title:"Apache Tomcat"
+product:"Apache Tomcat"
+http.server:"Apache-Coyote"
+port:8080 http.title:"Apache Tomcat"
+http.html:"Tomcat"
+http.html:"/manager/html"
+http.status_code:401 http.html:"Tomcat"

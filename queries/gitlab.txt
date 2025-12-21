@@ -1,0 +1,9 @@
+http.title:"GitLab"
+product:"GitLab"
+http.component:"GitLab"
+http.html:"gitlab"
+ssl.cert.subject.cn:"gitlab"
+http.favicon.hash:1617467086
+port:443 http.html:"gitlab"
+http.html:"/users/sign_in"
+http.html:"GitLab Community Edition"

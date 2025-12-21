@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# API Keys (مهم جداً!)
+*.env
+.env
+config.ini
+secrets.txt
+*_api_key.txt
+
+# Output files
+*_results.txt
+*_targets.txt
+*_vulns.txt
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

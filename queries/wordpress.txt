@@ -1,0 +1,6 @@
+http.component:"WordPress"
+http.html:"wp-content"
+http.html:"wp-includes"
+http.html:"/wp-json/"
+http.html:"wp-admin"
+http.server:"WordPress"

@@ -1,0 +1,9 @@
+http.title:"Log in - Atlassian JIRA"
+http.title:"JIRA"
+product:"Jira"
+http.component:"Atlassian Jira"
+http.html:"jira"
+ssl.cert.subject.cn:"jira"
+http.favicon.hash:-305179312
+port:8080 http.html:"jira"
+http.html:"atlassian-jira"

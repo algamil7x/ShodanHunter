@@ -1,0 +1,7 @@
+http.title:"Confluence"
+product:"Confluence"
+http.component:"Atlassian Confluence"
+http.html:"confluence"
+ssl.cert.subject.cn:"confluence"
+http.favicon.hash:182851856
+http.html:"/login.action"
