@@ -14,7 +14,7 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 
-BANNER = f"""{Fore.CYAN}
+BANNER = rf"""{Fore.CYAN}
  _____ _               _             _   _             _            
 /  ___| |             | |           | | | |           | |           
 \ `--.| |__   ___   __| | __ _ _ __ | |_| |_   _ _ __ | |_ ___ _ __ 
@@ -134,24 +134,26 @@ def list_technologies():
     print(f"\n{Fore.CYAN}=== Available Technologies ==={Style.RESET_ALL}\n")
     for tech, path in AVAILABLE_TECH.items():
         print(f"{Fore.GREEN}  {tech:<15} {Fore.YELLOW}→ {path}{Style.RESET_ALL}")
-    print(f"\n{Fore.YELLOW}Use: python3 shodanhunter.py -tech <technology> -d target.com -o output.txt{Style.RESET_ALL}\n")
+    print(
+        f"\n{Fore.YELLOW}Use: python3 shodanhunter.py -tech <technology> "
+        f"-d target.com -o output.txt{Style.RESET_ALL}\n"
+    )
 
 def main():
     print(BANNER)
-    
+
+    # List technologies
     if '-list' in sys.argv or '--list' in sys.argv:
         list_technologies()
         sys.exit(0)
-    
-    if len(sys.argv) < 5:
-        print(USAGE)
-        sys.exit(1)
-    
+
     queries_file = None
+    queries_files = []
     domain = None
     output_file = None
     tech = None
-    
+
+    # Manual argument parsing (keep simple)
     for i in range(len(sys.argv)):
         if sys.argv[i] == '-qf' and i + 1 < len(sys.argv):
             queries_file = sys.argv[i + 1]
@@ -161,23 +163,39 @@ def main():
             domain = sys.argv[i + 1]
         elif sys.argv[i] == '-o' and i + 1 < len(sys.argv):
             output_file = sys.argv[i + 1]
-    
-    if tech and tech in AVAILABLE_TECH:
-        queries_file = AVAILABLE_TECH[tech]
-    
-    if not all([queries_file, domain, output_file]):
+
+    # Handle -tech logic
+    if tech:
+        if tech == "all":
+            queries_files = list(AVAILABLE_TECH.values())
+        elif tech in AVAILABLE_TECH:
+            queries_files = [AVAILABLE_TECH[tech]]
+        else:
+            print(f"{Fore.RED}[-] Unknown technology: {tech}{Style.RESET_ALL}")
+            print(USAGE)
+            sys.exit(1)
+
+    # Validation
+    if not domain or not output_file or (not queries_file and not queries_files):
         print(f"{Fore.RED}[-] Missing required arguments{Style.RESET_ALL}")
         print(USAGE)
         sys.exit(1)
-    
+
+    # API key check
     api_key = os.environ.get('SHODAN_API_KEY')
     if not api_key:
         print(f"{Fore.RED}[-] SHODAN_API_KEY environment variable not set{Style.RESET_ALL}")
         print(f"{Fore.YELLOW}[*] Set it with: export SHODAN_API_KEY='your_key_here'{Style.RESET_ALL}")
         sys.exit(1)
-    
+
     hunter = ShodanHunter(api_key)
-    hunter.hunt(queries_file, domain, output_file)
+
+    # Run hunts
+    if queries_files:
+        for qf in queries_files:
+            hunter.hunt(qf, domain, output_file)
+    else:
+        hunter.hunt(queries_file, domain, output_file)
 
 if __name__ == "__main__":
     main()

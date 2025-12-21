@@ -1,3 +1,8 @@
+# =========================
+# Exposed Files & Sensitive Data
+# =========================
+
+# FREE (High Value)
 http.html:".git/config"
 http.html:".env"
 http.html:"index of /"
@@ -6,7 +11,11 @@ http.html:".aws/credentials"
 http.html:"phpinfo()"
 http.html:"DB_PASSWORD"
 http.html:"api_key"
-http.html:".htpasswd"
-http.html:"backup.sql"
-http.html:"database.sql"
-http.status_code:200 http.html:".git"
+
+# PAID / NOISY
+# http.html:".htpasswd"
+# http.html:"backup.sql"
+# http.html:"database.sql"
+# http.status_code:200 http.html:".git"
+
+

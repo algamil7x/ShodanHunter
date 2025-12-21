@@ -1,6 +1,14 @@
+# =========================
+# Kibana Queries
+# =========================
+
+# FREE
 http.title:"Kibana"
-product:"Kibana"
-http.component:"Kibana"
 http.html:"kibana"
 port:5601
-ssl.cert.subject.cn:"kibana"
+
+# PAID / NOISY
+# product:"Kibana"
+# http.component:"Kibana"
+# ssl.cert.subject.cn:"kibana"
+

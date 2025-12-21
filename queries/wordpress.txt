@@ -1,6 +1,14 @@
-http.component:"WordPress"
+# =========================
+# WordPress Queries
+# =========================
+
+# FREE
 http.html:"wp-content"
 http.html:"wp-includes"
 http.html:"/wp-json/"
 http.html:"wp-admin"
-http.server:"WordPress"
+
+# PAID / NOISY
+# http.component:"WordPress"
+# http.server:"WordPress"
+

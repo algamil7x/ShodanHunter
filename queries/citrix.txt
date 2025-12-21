@@ -1,23 +1,31 @@
-http.favicon.hash:-1292923998
-http.favicon.hash:-1166125415
+# =========================
+# Citrix / NetScaler Queries
+# =========================
+
+# FREE
 http.title:"NetScaler"
 http.html:"Citrix"
 http.title:"Citrix Gateway"
-product:"Citrix Gateway"
-product:"NetScaler"
-http.server:"NetScaler"
-http.headers.server:"NetScaler"
-ssl.cert.subject.cn:"citrix"
-ssl.cert.subject.cn:"netscaler"
-http.component:"Citrix"
-port:443 http.title:"Citrix"
-port:443 ssl.cert.subject.cn:"citrix"
-http.status_code:200 http.html:"NetScaler"
-http.status_code:200 http.html:"Citrix Gateway"
-port:443 http.title:"NetScaler"
 http.html:"/vpn/index.html"
 http.html:"/logon/LogonPoint/index.html"
-ssl.cert.issuer.cn:"Citrix"
 http.html:"Citrix ADC"
-port:8443 http.title:"Citrix"
-http.component:"Citrix NetScaler"
+
+# PAID / 
+# http.favicon.hash:-1292923998
+# http.favicon.hash:-1166125415
+# product:"Citrix Gateway"
+# product:"NetScaler"
+# http.server:"NetScaler"
+# http.headers.server:"NetScaler"
+# ssl.cert.subject.cn:"citrix"
+# ssl.cert.subject.cn:"netscaler"
+# http.component:"Citrix"
+# port:443 http.title:"Citrix"
+# port:443 ssl.cert.subject.cn:"citrix"
+# http.status_code:200 http.html:"NetScaler"
+# http.status_code:200 http.html:"Citrix Gateway"
+# port:443 http.title:"NetScaler"
+# ssl.cert.issuer.cn:"Citrix"
+# port:8443 http.title:"Citrix"
+# http.component:"Citrix NetScaler"
+

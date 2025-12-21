@@ -35,9 +35,6 @@ pip3 install -r requirements.txt
 # Set Shodan API Key
 export SHODAN_API_KEY="your_api_key_here"
 
-# Make executable
-chmod +x shodanhunter.py
-
 # Verify installation
 python3 shodanhunter.py -list
 ```
@@ -46,8 +43,8 @@ python3 shodanhunter.py -list
 
 1. Register at [Shodan](https://account.shodan.io/register)
 2. Get your API key from [account page](https://account.shodan.io)
-3. Free tier: 100 queries/month
-4. Paid tier: Unlimited queries ($49/month)
+3. Queries are written to be Free‑tier friendly by default
+4. Noisy / paid‑tier queries are commented inside query files
 
 ---
 
@@ -127,9 +124,7 @@ ShodanHunter/
 │   └── exposed.txt         # Exposed files queries
 ├── examples/               # Example outputs
 │   └── demo_output.txt
-└── docs/                   # Documentation
-    ├── INSTALLATION.md
-    └── CONTRIBUTING.md
+
 ```
 
 ---

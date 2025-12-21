@@ -1,11 +1,19 @@
+# =========================
+# Jenkins Queries
+# =========================
+
+# FREE
 http.title:"Dashboard [Jenkins]"
 http.title:"Jenkins"
-product:"Jenkins"
-http.component:"Jenkins"
 http.html:"jenkins"
 http.html:"X-Jenkins"
-http.favicon.hash:81586312
-port:8080 http.title:"Jenkins"
-http.server:"Jetty" http.html:"jenkins"
-ssl.cert.subject.cn:"jenkins"
-http.status_code:403 http.html:"Jenkins"
+
+# PAID / NOISY
+# product:"Jenkins"
+# http.component:"Jenkins"
+# http.favicon.hash:81586312
+# port:8080 http.title:"Jenkins"
+# http.server:"Jetty" http.html:"jenkins"
+# ssl.cert.subject.cn:"jenkins"
+# http.status_code:403 http.html:"Jenkins"
+
