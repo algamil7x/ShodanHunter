@@ -179,7 +179,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 ---
 
 ## 📞 Contact
-
+- **Twitter/X**: [@algamil7x](https://x.com/algamil7x)
 - **GitHub**: [@algamil7x](https://github.com/algamil7x)
 - **Issues**: [Report bugs](https://github.com/algamil7x/ShodanHunter/issues)
 - **Pull Requests**: [Contribute](https://github.com/algamil7x/ShodanHunter/pulls)
