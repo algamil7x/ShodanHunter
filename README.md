@@ -41,8 +41,8 @@ python3 shodanhunter.py -list
 
 ### Getting Shodan API Key
 
-1. Register at [Shodan](https://account.shodan.io/register)
-2. Get your API key from [account page](https://account.shodan.io)
+- Get your API key from [account page](https://account.shodan.io)
+
 ⚠️ **Important Requirement**
 
 This tool requires a **Shodan PRO or Academic API key**.
