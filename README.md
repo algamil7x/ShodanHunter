@@ -43,8 +43,21 @@ python3 shodanhunter.py -list
 
 1. Register at [Shodan](https://account.shodan.io/register)
 2. Get your API key from [account page](https://account.shodan.io)
-3. Queries are written to be Free‑tier friendly by default
-4. Noisy / paid‑tier queries are commented inside query files
+⚠️ **Important Requirement**
+
+This tool requires a **Shodan PRO or Academic API key**.
+
+ShodanHunter relies heavily on advanced Shodan filters such as:
+- `product:`
+- `http.favicon.hash`
+- `ssl.cert.*`
+- technology-specific components
+
+Free Shodan accounts will return **little to no results**.
+
+If you are serious about bug bounty hunting with this tool,
+a paid Shodan account is strongly recommended.
+
 
 ---
 
