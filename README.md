@@ -13,7 +13,7 @@ Hunt for vulnerabilities across multiple technologies using Shodan API. Perfect 
 ## ✨ Features
 
 - 🎯 **10+ Technologies**: Citrix, Jenkins, GitLab, Jira, Confluence, WordPress, Apache Tomcat, Grafana, Kibana, Exposed Files
-- 🚀 **Fast Scanning**: Concurrent searching with intelligent rate limiting
+- 🚀 **Efficient Scanning**: Optimized Shodan queries with safe rate handling
 - 📊 **Organized Queries**: Technology-specific query files for precision
 - 💾 **Clean Output**: Deduplicated results ready for Nuclei scanning
 - 🎨 **Beautiful UI**: Colored terminal output for better readability
