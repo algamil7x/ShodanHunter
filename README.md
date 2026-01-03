@@ -21,28 +21,28 @@ Hunt for vulnerabilities across multiple technologies using Shodan API. Perfect 
 
 ---
 
-### Quick Start
+## Quick Start
 
-# Clone repository
+### Clone repository
 ```bash
 git clone https://github.com/algamil7x/ShodanHunter.git
 cd ShodanHunter
 ```
-# Create virtual environment
+### Create virtual environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-# Install dependencies
+### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-# Set Shodan API Key
+### Set Shodan API Key
 ```bash
 export SHODAN_API_KEY="your_api_key_here"
 ```
-# Verify installation
+### Verify installation
 ```bash
 python shodanhunter.py -list
 ```
@@ -70,26 +70,26 @@ a paid Shodan account is strongly recommended.
 
 ## 📖 Usage
 
-### List Available Technologies
+## List Available Technologies
 ```bash
 shodanhunter -list
 ```
 
-### Scan Single Technology
+## Scan Single Technology
 ```bash
 shodanhunter -tech citrix -d target.com
 
 ```
-## Output will be saved to:
+### Output will be saved to:
 ```bash
 output/target.com/citrix.txt
 ```
 
-### Scan All Technologies
+## Scan All Technologies
 ```bash
 shodanhunter -tech all -d target.com
 ```
-## Output will be saved to:
+### Output will be saved to:
 ```bash
 output/target.com
 ```
@@ -118,7 +118,7 @@ output/target.com
 Perfect workflow for bug bounty:
 ```bash
 # Step 1: Hunt with ShodanHunter
-python3 shodanhunter.py -tech citrix -d target.com -o targets.txt
+python3 shodanhunter.py -tech citrix -d target.com 
 
 # Step 2: Scan with Nuclei
 cat targets.txt | nuclei -tags citrix,xss -severity high,critical -o vulns.txt
