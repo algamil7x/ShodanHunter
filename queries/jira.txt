@@ -1,17 +1,18 @@
-# =========================
-# Atlassian Jira Queries
-# =========================
+product:"Jira"
 
-# FREE
-http.title:"Log in - Atlassian JIRA"
+http.favicon.hash:-305179312
+
+http.component:"Atlassian Jira"
+
+ssl.cert.subject.cn:"jira"
+
 http.title:"JIRA"
-http.html:"jira"
-http.html:"atlassian-jira"
+http.title:"Log in - Atlassian"
 
-# PAID / NOISY
-# product:"Jira"
-# http.component:"Atlassian Jira"
-# ssl.cert.subject.cn:"jira"
-# http.favicon.hash:-305179312
-# port:8080 http.html:"jira"
+http.html:"/secure/SetupMode!default.jspa"
+http.html:"/secure/Dashboard.jspa"
 
+http.html:"/rest/api/2/serverInfo"
+http.html:"/rest/api/2/myself"
+
+port:8080 http.title:"JIRA"

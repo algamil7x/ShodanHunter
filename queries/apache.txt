@@ -1,15 +1,16 @@
-# =========================
-# Apache Tomcat Queries
-# =========================
+product:"Apache Tomcat"
 
-# FREE
+http.server:"Apache-Coyote"
+
+ssl.cert.subject.cn:"tomcat"
+
 http.title:"Apache Tomcat"
-http.html:"Tomcat"
+
 http.html:"/manager/html"
+http.html:"/host-manager/html"
 
-# PAID / NOISY
-# product:"Apache Tomcat"
-# http.server:"Apache-Coyote"
-# port:8080 http.title:"Apache Tomcat"
-# http.status_code:401 http.html:"Tomcat"
+port:8080 http.title:"Apache Tomcat"
+port:8443 http.title:"Apache Tomcat"
 
+http.status_code:401 http.title:"Apache Tomcat"
+http.status_code:403 http.title:"Apache Tomcat"

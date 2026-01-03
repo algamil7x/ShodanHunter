@@ -1,21 +1,21 @@
-# =========================
-# Exposed Files & Sensitive Data
-# =========================
-
-# FREE (High Value)
 http.html:".git/config"
-http.html:".env"
-http.html:"index of /"
+
 http.title:"Index of /"
-http.html:".aws/credentials"
+http.html:"Index of /"
+
+http.html:".env"
+http.html:"/.env"
+
 http.html:"phpinfo()"
-http.html:"DB_PASSWORD"
-http.html:"api_key"
 
-# PAID / NOISY
-# http.html:".htpasswd"
-# http.html:"backup.sql"
-# http.html:"database.sql"
-# http.status_code:200 http.html:".git"
+http.html:".aws/credentials"
+http.html:"AWS_ACCESS_KEY_ID"
 
+http.html:".htpasswd"
 
+http.html:"backup.sql"
+http.html:"database.sql"
+
+http.html:"config.php.bak"
+http.html:"wp-config.php.bak"
+http.html:"wp-config.php.old"

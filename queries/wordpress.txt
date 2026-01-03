@@ -1,14 +1,17 @@
-# =========================
-# WordPress Queries
-# =========================
+product:"WordPress"
 
-# FREE
-http.html:"wp-content"
-http.html:"wp-includes"
-http.html:"/wp-json/"
-http.html:"wp-admin"
+http.favicon.hash:-1642532491
 
-# PAID / NOISY
-# http.component:"WordPress"
-# http.server:"WordPress"
+http.component:"WordPress"
 
+http.title:"WordPress"
+
+http.html:"/wp-admin/install.php"
+http.html:"/wp-admin/setup-config.php"
+
+http.html:"/wp-json/wp/v2/users"
+http.html:"/wp-json/wp/v2/posts"
+
+http.html:"xmlrpc.php"
+
+http.status_code:200 http.html:"wp-login.php"

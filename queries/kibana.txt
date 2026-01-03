@@ -1,14 +1,16 @@
-# =========================
-# Kibana Queries
-# =========================
+product:"Kibana"
 
-# FREE
+http.component:"Kibana"
+
+ssl.cert.subject.cn:"kibana"
+
 http.title:"Kibana"
-http.html:"kibana"
-port:5601
 
-# PAID / NOISY
-# product:"Kibana"
-# http.component:"Kibana"
-# ssl.cert.subject.cn:"kibana"
+http.html:"/login"
+http.html:"/api/status"
+http.html:"/app/kibana"
 
+port:5601 http.title:"Kibana"
+
+http.status_code:401 http.title:"Kibana"
+http.status_code:403 http.title:"Kibana"

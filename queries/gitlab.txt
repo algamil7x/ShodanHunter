@@ -1,17 +1,17 @@
-# =========================
-# GitLab Queries
-# =========================
+product:"GitLab"
 
-# FREE
+http.favicon.hash:1617467086
+
+http.component:"GitLab"
+
+ssl.cert.subject.cn:"gitlab"
+
 http.title:"GitLab"
-http.html:"gitlab"
+
 http.html:"/users/sign_in"
-http.html:"GitLab Community Edition"
+http.html:"/help"
 
-# PAID / NOISY
-# product:"GitLab"
-# http.component:"GitLab"
-# ssl.cert.subject.cn:"gitlab"
-# http.favicon.hash:1617467086
-# port:443 http.html:"gitlab"
+http.html:"/-/graphql"
+http.html:"/api/v4/version"
 
+http.status_code:200 http.html:"/users/password/new"

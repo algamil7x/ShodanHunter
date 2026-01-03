@@ -1,15 +1,15 @@
-# =========================
-# Atlassian Confluence Queries
-# =========================
+product:"Confluence"
 
-# FREE
+http.favicon.hash:182851856
+
+http.component:"Atlassian Confluence"
+
+ssl.cert.subject.cn:"confluence"
+
 http.title:"Confluence"
-http.html:"confluence"
+
 http.html:"/login.action"
+http.html:"/setup/setupstart.action"
 
-# PAID / NOISY
-# product:"Confluence"
-# http.component:"Atlassian Confluence"
-# ssl.cert.subject.cn:"confluence"
-# http.favicon.hash:182851856
-
+http.html:"/rest/api/latest/serverInfo"
+http.html:"/rest/api/user"

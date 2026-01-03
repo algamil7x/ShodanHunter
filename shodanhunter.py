@@ -1,201 +1,191 @@
 #!/usr/bin/env python3
 """
-ShodanHunter - Multi-Technology Vulnerability Scanner
-Hunt for vulnerabilities across multiple technologies using Shodan API
-GitHub: https://github.com/algamil7x/ShodanHunter
+ShodanHunter - Multi-Technology Shodan Hunting Tool
+Author: algamil7x
 """
 
 import shodan
 import sys
 import time
 import os
-import glob
+import logging
+from datetime import datetime
 from colorama import Fore, Style, init
 
 init(autoreset=True)
 
+# =====================
+# Banner
+# =====================
 BANNER = rf"""{Fore.CYAN}
- _____ _               _             _   _             _            
-/  ___| |             | |           | | | |           | |           
-\ `--.| |__   ___   __| | __ _ _ __ | |_| |_   _ _ __ | |_ ___ _ __ 
+ _____ _               _             _   _             _
+/  ___| |             | |           | | | |           | |
+\ `--.| |__   ___   __| | __ _ _ __ | |_| |_   _ _ __ | |_ ___ _ __
  `--. \ '_ \ / _ \ / _` |/ _` | '_ \|  _  | | | | '_ \| __/ _ \ '__|
-/\__/ / | | | (_) | (_| | (_| | | | | | | | |_| | | | | ||  __/ |   
-\____/|_| |_|\___/ \__,_|\__,_|_| |_\_| |_/\__,_|_| |_|\__\___|_|   
+/\__/ / | | | (_) | (_| | (_| | | | | | | | |_| | | | | ||  __/ |
+\____/|_| |_|\___/ \__,_|\__,_|_| |_|\_| |_/\__,_|_| |_|\__\___|_|
 
-{Fore.GREEN}[+] ShodanHunter v1.0 - Multi-Technology Scanner
-{Fore.YELLOW}[*] Technologies: Citrix, Jenkins, GitLab, Jira, Confluence, WordPress, Apache, Grafana, Kibana
-{Fore.CYAN}[*] GitHub: https://github.com/algamil7x/ShodanHunter
+{Fore.GREEN}[+] ShodanHunter by algamil7x
+{Fore.YELLOW}[*] Advanced Shodan Hunting Tool (PRO / Academic Required)
+{Fore.CYAN}[*] https://github.com/algamil7x/ShodanHunter
 {Style.RESET_ALL}"""
 
-USAGE = f"""{Fore.YELLOW}
-Usage Examples:
-  # List available technologies
-  python3 shodanhunter.py -list
-  
-  # Scan single technology
-  python3 shodanhunter.py -tech citrix -d target.com -o results.txt
-  
-  # Scan all technologies
-  python3 shodanhunter.py -tech all -d target.com -o results.txt
-  
-  # Use custom query file
-  python3 shodanhunter.py -qf queries/citrix.txt -d target.com -o results.txt
-{Style.RESET_ALL}"""
-
+# =====================
+# Available Technologies
+# =====================
 AVAILABLE_TECH = {
-    'citrix': 'queries/citrix.txt',
-    'jenkins': 'queries/jenkins.txt',
-    'gitlab': 'queries/gitlab.txt',
-    'jira': 'queries/jira.txt',
-    'confluence': 'queries/confluence.txt',
-    'wordpress': 'queries/wordpress.txt',
-    'apache': 'queries/apache.txt',
-    'grafana': 'queries/grafana.txt',
-    'kibana': 'queries/kibana.txt',
-    'exposed': 'queries/exposed.txt',
+    "citrix": "queries/citrix.txt",
+    "jenkins": "queries/jenkins.txt",
+    "gitlab": "queries/gitlab.txt",
+    "jira": "queries/jira.txt",
+    "confluence": "queries/confluence.txt",
+    "wordpress": "queries/wordpress.txt",
+    "apache": "queries/apache.txt",
+    "grafana": "queries/grafana.txt",
+    "kibana": "queries/kibana.txt",
+    "exposed": "queries/exposed.txt",
 }
 
-class ShodanHunter:
-    def __init__(self, api_key):
-        self.api = shodan.Shodan(api_key)
-        self.results = set()
-        
-    def search_query(self, query, domain):
-        full_query = f"{query} hostname:*.{domain}"
-        
-        try:
-            print(f"{Fore.YELLOW}[*] Searching: {query}{Style.RESET_ALL}")
-            results = self.api.search(full_query, limit=100)
-            
-            total = results.get('total', 0)
-            print(f"{Fore.CYAN}    Total available: {total}{Style.RESET_ALL}")
-            
-            count = 0
-            for result in results['matches']:
-                hostnames = result.get('hostnames', [])
-                port = result.get('port', 443)
-                
-                for hostname in hostnames:
-                    if domain in hostname:
-                        url = f"https://{hostname}:{port}" if port != 443 else f"https://{hostname}"
-                        
-                        if url not in self.results:
-                            self.results.add(url)
-                            count += 1
-                            print(f"{Fore.GREEN}    [+] Found: {url}{Style.RESET_ALL}")
-            
-            print(f"{Fore.GREEN}    ✓ Query complete: {count} unique URLs added{Style.RESET_ALL}\n")
-            return count
-            
-        except shodan.APIError as e:
-            print(f"{Fore.RED}[-] Error: {e}{Style.RESET_ALL}")
-            return 0
-        except Exception as e:
-            print(f"{Fore.RED}[-] Unexpected error: {e}{Style.RESET_ALL}")
-            return 0
-    
-    def hunt(self, queries_file, domain, output_file):
-        print(f"{Fore.CYAN}[*] Starting hunt on: *.{domain}")
-        print(f"[*] Loading queries from: {queries_file}\n{Style.RESET_ALL}")
-        
-        try:
-            with open(queries_file, 'r') as f:
-                queries = [line.strip() for line in f if line.strip() and not line.startswith('#')]
-        except FileNotFoundError:
-            print(f"{Fore.RED}[-] File not found: {queries_file}{Style.RESET_ALL}")
-            return
-        
-        print(f"{Fore.CYAN}Loaded {len(queries)} queries from {queries_file}{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}Output will be saved to: {output_file}\n{Style.RESET_ALL}")
-        
-        query_num = 1
-        for query in queries:
-            print(f"{Fore.CYAN}[{query_num}/{len(queries)}] Domain: {domain} | Query: {query}{Style.RESET_ALL}")
-            self.search_query(query, domain)
-            query_num += 1
-            time.sleep(1)
-        
-        print(f"{Fore.GREEN}✓ All queries complete: {len(self.results)} total unique URLs{Style.RESET_ALL}\n")
-        self.save_results(output_file)
-    
-    def save_results(self, output_file):
-        print(f"{Fore.GREEN}✓ Completed! Found {len(self.results)} unique URLs. Saved to {output_file}{Style.RESET_ALL}")
-        
-        with open(output_file, 'w') as f:
-            for url in sorted(self.results):
-                f.write(url + '\n')
-        
-        print(f"\n{Fore.YELLOW}=== RESULTS SUMMARY ==={Style.RESET_ALL}")
-        print(f"{Fore.CYAN}Total URLs: {len(self.results)}{Style.RESET_ALL}\n")
-        for url in sorted(self.results):
-            print(url)
+# =====================
+# Logging Setup
+# =====================
+def setup_logging(output_dir):
+    log_file = os.path.join(output_dir, "shodanhunter.log")
 
-def list_technologies():
-    print(f"\n{Fore.CYAN}=== Available Technologies ==={Style.RESET_ALL}\n")
-    for tech, path in AVAILABLE_TECH.items():
-        print(f"{Fore.GREEN}  {tech:<15} {Fore.YELLOW}→ {path}{Style.RESET_ALL}")
-    print(
-        f"\n{Fore.YELLOW}Use: python3 shodanhunter.py -tech <technology> "
-        f"-d target.com -o output.txt{Style.RESET_ALL}\n"
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s",
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler(sys.stdout)
+        ]
     )
 
+    return logging.getLogger("ShodanHunter")
+
+
+# =====================
+# Core Class
+# =====================
+class ShodanHunter:
+    def __init__(self, api_key, logger):
+        self.api = shodan.Shodan(api_key)
+        self.logger = logger
+
+    def search_query(self, query, domain, results_set):
+        full_query = f"{query} hostname:*.{domain}"
+        self.logger.info(f"Searching: {query}")
+
+        try:
+            results = self.api.search(full_query, limit=100)
+            total = results.get("total", 0)
+            self.logger.info(f"Total available results: {total}")
+
+            for result in results.get("matches", []):
+                port = result.get("port", 443)
+                for hostname in result.get("hostnames", []):
+                    if domain in hostname:
+                        url = f"https://{hostname}:{port}" if port != 443 else f"https://{hostname}"
+                        results_set.add(url)
+
+        except shodan.APIError as e:
+            self.logger.error(f"Shodan API error: {e}")
+        except Exception as e:
+            self.logger.error(f"Unexpected error: {e}")
+
+    def hunt(self, tech_name, queries_file, domain, output_dir):
+        self.logger.info(f"Starting hunt for tech: {tech_name}")
+        self.logger.info(f"Using queries file: {queries_file}")
+
+        try:
+            with open(queries_file, "r") as f:
+                queries = [q.strip() for q in f if q.strip() and not q.startswith("#")]
+        except FileNotFoundError:
+            self.logger.error(f"Query file not found: {queries_file}")
+            return
+
+        results = set()
+
+        for idx, query in enumerate(queries, 1):
+            self.logger.info(f"[{idx}/{len(queries)}] {query}")
+            self.search_query(query, domain, results)
+            time.sleep(1)
+
+        output_file = os.path.join(output_dir, f"{tech_name}.txt")
+        with open(output_file, "w") as f:
+            for url in sorted(results):
+                f.write(url + "\n")
+
+        self.logger.info(f"Saved {len(results)} results to {output_file}")
+
+
+# =====================
+# Helpers
+# =====================
+def list_technologies():
+    print(f"\n{Fore.CYAN}Available Technologies:{Style.RESET_ALL}\n")
+    for tech in AVAILABLE_TECH:
+        print(f"  - {tech}")
+    print()
+
+
+# =====================
+# Main
+# =====================
 def main():
     print(BANNER)
 
-    # List technologies
-    if '-list' in sys.argv or '--list' in sys.argv:
+    if "-list" in sys.argv or "--list" in sys.argv:
         list_technologies()
         sys.exit(0)
 
-    queries_file = None
-    queries_files = []
     domain = None
-    output_file = None
     tech = None
+    query_file = None
 
-    # Manual argument parsing (keep simple)
     for i in range(len(sys.argv)):
-        if sys.argv[i] == '-qf' and i + 1 < len(sys.argv):
-            queries_file = sys.argv[i + 1]
-        elif sys.argv[i] == '-tech' and i + 1 < len(sys.argv):
-            tech = sys.argv[i + 1].lower()
-        elif sys.argv[i] == '-d' and i + 1 < len(sys.argv):
+        if sys.argv[i] == "-d" and i + 1 < len(sys.argv):
             domain = sys.argv[i + 1]
-        elif sys.argv[i] == '-o' and i + 1 < len(sys.argv):
-            output_file = sys.argv[i + 1]
+        elif sys.argv[i] == "-tech" and i + 1 < len(sys.argv):
+            tech = sys.argv[i + 1].lower()
+        elif sys.argv[i] == "-qf" and i + 1 < len(sys.argv):
+            query_file = sys.argv[i + 1]
 
-    # Handle -tech logic
-    if tech:
+    if not domain or (not tech and not query_file):
+        print(f"{Fore.RED}[-] Missing required arguments{Style.RESET_ALL}")
+        print("Usage:")
+        print("  python3 shodanhunter.py -tech citrix -d target.com")
+        print("  python3 shodanhunter.py -tech all -d target.com")
+        print("  python3 shodanhunter.py -qf queries/exposed.txt -d target.com")
+        sys.exit(1)
+
+    api_key = os.environ.get("SHODAN_API_KEY")
+    if not api_key:
+        print(f"{Fore.RED}[-] SHODAN_API_KEY not set{Style.RESET_ALL}")
+        sys.exit(1)
+
+    # Create output directory per run
+    output_dir = os.path.join("output", domain)
+    os.makedirs(output_dir, exist_ok=True)
+
+    logger = setup_logging(output_dir)
+    hunter = ShodanHunter(api_key, logger)
+
+    if query_file:
+        hunter.hunt("custom", query_file, domain, output_dir)
+    else:
         if tech == "all":
-            queries_files = list(AVAILABLE_TECH.values())
+            for tech_name, qf in AVAILABLE_TECH.items():
+                hunter.hunt(tech_name, qf, domain, output_dir)
         elif tech in AVAILABLE_TECH:
-            queries_files = [AVAILABLE_TECH[tech]]
+            hunter.hunt(tech, AVAILABLE_TECH[tech], domain, output_dir)
         else:
-            print(f"{Fore.RED}[-] Unknown technology: {tech}{Style.RESET_ALL}")
-            print(USAGE)
+            logger.error(f"Unknown technology: {tech}")
             sys.exit(1)
 
-    # Validation
-    if not domain or not output_file or (not queries_file and not queries_files):
-        print(f"{Fore.RED}[-] Missing required arguments{Style.RESET_ALL}")
-        print(USAGE)
-        sys.exit(1)
+    logger.info("Hunting completed successfully")
 
-    # API key check
-    api_key = os.environ.get('SHODAN_API_KEY')
-    if not api_key:
-        print(f"{Fore.RED}[-] SHODAN_API_KEY environment variable not set{Style.RESET_ALL}")
-        print(f"{Fore.YELLOW}[*] Set it with: export SHODAN_API_KEY='your_key_here'{Style.RESET_ALL}")
-        sys.exit(1)
-
-    hunter = ShodanHunter(api_key)
-
-    # Run hunts
-    if queries_files:
-        for qf in queries_files:
-            hunter.hunt(qf, domain, output_file)
-    else:
-        hunter.hunt(queries_file, domain, output_file)
 
 if __name__ == "__main__":
     main()
+

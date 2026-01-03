@@ -1,15 +1,18 @@
-# =========================
-# Grafana Queries
-# =========================
+product:"Grafana"
 
-# FREE
+http.favicon.hash:1585362242
+
+http.component:"Grafana"
+
+ssl.cert.subject.cn:"grafana"
+
 http.title:"Grafana"
-http.html:"grafana"
+
+http.html:"/login"
+http.html:"/api/health"
+http.html:"/api/frontend/settings"
+
 port:3000 http.title:"Grafana"
 
-# PAID / NOISY
-# product:"Grafana"
-# http.component:"Grafana"
-# ssl.cert.subject.cn:"grafana"
-# http.favicon.hash:1585362242
-
+http.status_code:401 http.title:"Grafana"
+http.status_code:403 http.title:"Grafana"
