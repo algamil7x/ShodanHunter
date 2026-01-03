@@ -21,24 +21,31 @@ Hunt for vulnerabilities across multiple technologies using Shodan API. Perfect 
 
 ---
 
-## 🛠️ Installation
-
 ### Quick Start
-```bash
+
 # Clone repository
+```bash
 git clone https://github.com/algamil7x/ShodanHunter.git
 cd ShodanHunter
-
-# Install dependencies
-pip3 install -r requirements.txt
-
-# Set Shodan API Key
-export SHODAN_API_KEY="your_api_key_here"
-
-# Verify installation
-python3 shodanhunter.py -list
+```
+# Create virtual environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
+# Install dependencies
+```bash
+pip install -r requirements.txt
+```
+# Set Shodan API Key
+```bash
+export SHODAN_API_KEY="your_api_key_here"
+```
+# Verify installation
+```bash
+python shodanhunter.py -list
+```
 ### Getting Shodan API Key
 
 - Get your API key from [account page](https://account.shodan.io)
@@ -65,22 +72,26 @@ a paid Shodan account is strongly recommended.
 
 ### List Available Technologies
 ```bash
-python3 shodanhunter.py -list
+shodanhunter -list
 ```
 
 ### Scan Single Technology
 ```bash
-python3 shodanhunter.py -tech citrix -d target.com -o results.txt
+shodanhunter -tech citrix -d target.com
+
+```
+## Output will be saved to:
+```bash
+output/target.com/citrix.txt
 ```
 
 ### Scan All Technologies
 ```bash
-python3 shodanhunter.py -tech all -d target.com -o results.txt
+shodanhunter -tech all -d target.com
 ```
-
-### Use Custom Query File
+## Output will be saved to:
 ```bash
-python3 shodanhunter.py -qf queries/citrix.txt -d target.com -o results.txt
+output/target.com
 ```
 
 ---
