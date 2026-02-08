@@ -208,3 +208,13 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 **Happy Hunting! 🎯🔥**
 
 Made with ❤️ by Bug Bounty Hunters, for Bug Bounty Hunters
+
+<br>
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/9ec3fed0-45ff-4cb3-988c-f8cd66e85082">
+</p>
+
+
+<br>
+
